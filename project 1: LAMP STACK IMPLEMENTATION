@@ -1,0 +1,17 @@
+ sudo apt install apache2 
+ 1  sudo apt install php libapache2-mod-php php-mysql (install php with mysql)
+    2  php -v
+    3  sudo mkdir /var/www/projectlamp  (create project name)
+    4  sudo chown -R $USER:$USER /var/www/projectlamp ( grant user permission)
+    5  sudo vi /etc/apache2/sites-available/projectlamp.conf ( create a virtual host)
+    6  sudo ls /etc/apache2/sites-available
+    7  sudo a2ensite projectlamp (a2ensite command to enable the new virtual host:)
+    8  sudo a2dissite 000-default (disable Apache’s default website use a2dissite command)
+    9  sudo apache2ctl configtest
+   10  sudo systemctl reload apache2 (reload Apache so these changes take effect)
+   11  sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
+   12  sudo vim /etc/apache2/mods-enabled/dir.conf (change the order in which the index.php)
+   13  sudo systemctl reload apache2
+   14  vim /var/www/projectlamp/index.php~
+   15  vim /var/www/projectlamp/index.php
+   16  sudo systemctl reload apache2
