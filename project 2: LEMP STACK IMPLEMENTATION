@@ -1,0 +1,51 @@
+    1  clear
+    2  sudo apt install nginx
+    3  sudo apt update
+    4  sudo systemctl status nginx
+    5  clear
+    6  s http://169.254.169.254/latest/meta-data/public-ipv4
+    7  curl -s http://169.254.169.254/latest/meta-data/public-ipv4
+    8  sudo apt install mysql-server
+    9  sudo mysql
+   10  sudo apt install php-fpm php-mysql
+   11  clear
+   12  sudo mkdir /var/www/projectLEMP
+   13  ll /var/www
+   14  sudo chown -R $USER:$USER /var/www/projectLEMP
+   15  sudo vi  /etc/nginx/sites-available/projectLEMP
+   16  ll /etc/nginx/sites-available/
+   17  sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
+   18  clear
+   19  sudo nginx -t
+   20  sudo unlink /etc/nginx/sites-enabled/default
+   21  sudo systemctl reload nginx
+   22  sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
+   23  sudo vim /var/www/projectLEMP/info.php
+   24  sudo rm /var/www/your_domain/info.php
+   25  sudo rm -rf  /var/www/your_domain/info.php
+   26  sudo rm /var/www/projectLEMP/info.php
+   27  sudo mysql
+   28  mysql -u example_user -p
+   29  sudo mysql
+   30  vi /var/www/projectLEMP/todo_list.php
+   31  sudo sql
+
+
+
+<?php
+$user = "example_user";
+$password = "password";
+$database = "example_database";
+$table = "todo_list";
+
+try {
+  $db = new PDO("mysql:host=localhost;dbname=$database", $user, $password);
+  echo "<h2>TODO</h2><ol>";
+  foreach($db->query("SELECT content FROM $table") as $row) {
+    echo "<li>" . $row['content'] . "</li>";
+  }
+  echo "</ol>";
+} catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+}
